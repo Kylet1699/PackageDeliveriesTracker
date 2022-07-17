@@ -1,0 +1,62 @@
+[
+  {
+    "expiryDate": "2022-08-31T23:38",
+    "type": "cmpt213.assignment3.packagedeliveries.model.Perishable",
+    "name": "Test1",
+    "note": "",
+    "price": 432.0,
+    "weight": 123.0,
+    "isDelivered": false,
+    "deliveryDate": "2022-12-23T22:19"
+  },
+  {
+    "fee": 98.0,
+    "type": "cmpt213.assignment3.packagedeliveries.model.Electronic",
+    "name": "It\u0027s a computer",
+    "note": "yes it is",
+    "price": 32131.0,
+    "weight": 1231231.0,
+    "isDelivered": false,
+    "deliveryDate": "2022-01-01T01:01"
+  },
+  {
+    "fee": 1,
+    "type": "cmpt213.assignment3.packagedeliveries.model.Electronic",
+    "name": "It\u0027s a computer",
+    "note": "yes it is",
+    "price": 32131.0,
+    "weight": 1231231.0,
+    "isDelivered": true,
+    "deliveryDate": "2023-01-01T01:01"
+  },
+  {
+    "fee": 98.0,
+    "type": "cmpt213.assignment3.packagedeliveries.model.Electronic",
+    "name": "It\u0027s a computer",
+    "note": "yes it is",
+    "price": 32131.0,
+    "weight": 1231231.0,
+    "isDelivered": false,
+    "deliveryDate": "2021-01-01T01:01"
+  },
+  {
+    "fee": 2,
+    "type": "cmpt213.assignment3.packagedeliveries.model.Electronic",
+    "name": "It\u0027s a computer",
+    "note": "yes it is",
+    "price": 32131.0,
+    "weight": 1231231.0,
+    "isDelivered": true,
+    "deliveryDate": "2023-01-01T01:01"
+  },
+  {
+    "fee": 3,
+    "type": "cmpt213.assignment3.packagedeliveries.model.Electronic",
+    "name": "It\u0027s a computer",
+    "note": "yes it is",
+    "price": 32131.0,
+    "weight": 1231231.0,
+    "isDelivered": true,
+    "deliveryDate": "2020-01-01T01:01"
+  }
+]
