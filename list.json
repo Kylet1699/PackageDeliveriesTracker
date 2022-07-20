@@ -1,16 +1,7 @@
 [
   {
-    "expiryDate": "2022-08-31T23:38",
-    "type": "cmpt213.assignment3.packagedeliveries.model.Perishable",
-    "name": "Test1",
-    "note": "",
-    "price": 432.0,
-    "weight": 123.0,
-    "isDelivered": false,
-    "deliveryDate": "2022-12-23T22:19"
-  },
-  {
     "fee": 98.0,
+    "id": 1,
     "type": "cmpt213.assignment3.packagedeliveries.model.Electronic",
     "name": "It\u0027s a computer",
     "note": "yes it is",
@@ -20,43 +11,69 @@
     "deliveryDate": "2022-01-01T01:01"
   },
   {
-    "fee": 1,
-    "type": "cmpt213.assignment3.packagedeliveries.model.Electronic",
-    "name": "It\u0027s a computer",
-    "note": "yes it is",
-    "price": 32131.0,
-    "weight": 1231231.0,
-    "isDelivered": true,
-    "deliveryDate": "2023-01-01T01:01"
-  },
-  {
-    "fee": 98.0,
-    "type": "cmpt213.assignment3.packagedeliveries.model.Electronic",
-    "name": "It\u0027s a computer",
-    "note": "yes it is",
-    "price": 32131.0,
-    "weight": 1231231.0,
+    "expiryDate": "2022-07-11T00:30",
+    "id": 2,
+    "type": "cmpt213.assignment3.packagedeliveries.model.Perishable",
+    "name": "apple",
+    "note": "an apple a day",
+    "price": 1.2,
+    "weight": 0.1,
     "isDelivered": false,
-    "deliveryDate": "2021-01-01T01:01"
+    "deliveryDate": "2022-07-01T00:00"
   },
   {
-    "fee": 2,
+    "fee": 50.0,
+    "id": 3,
     "type": "cmpt213.assignment3.packagedeliveries.model.Electronic",
-    "name": "It\u0027s a computer",
-    "note": "yes it is",
-    "price": 32131.0,
-    "weight": 1231231.0,
-    "isDelivered": true,
-    "deliveryDate": "2023-01-01T01:01"
+    "name": "Iphone",
+    "note": "",
+    "price": 1200.0,
+    "weight": 1.2,
+    "isDelivered": false,
+    "deliveryDate": "2022-07-01T00:30"
   },
   {
-    "fee": 3,
+    "expiryDate": "2022-07-22T02:30",
+    "id": 1,
+    "type": "cmpt213.assignment3.packagedeliveries.model.Perishable",
+    "name": "Korean BBQ Chicken",
+    "note": "My fave food",
+    "price": 24.0,
+    "weight": 0.2,
+    "isDelivered": false,
+    "deliveryDate": "2022-07-19T22:30"
+  },
+  {
+    "author": "Hello world",
+    "id": 2,
+    "type": "cmpt213.assignment3.packagedeliveries.model.Book",
+    "name": "textbook",
+    "note": "it\u0027s thick and expensive",
+    "price": 200.0,
+    "weight": 200.0,
+    "isDelivered": false,
+    "deliveryDate": "2022-08-29T10:00"
+  },
+  {
+    "fee": 15.0,
+    "id": 3,
     "type": "cmpt213.assignment3.packagedeliveries.model.Electronic",
-    "name": "It\u0027s a computer",
-    "note": "yes it is",
-    "price": 32131.0,
-    "weight": 1231231.0,
-    "isDelivered": true,
-    "deliveryDate": "2020-01-01T01:01"
+    "name": "Apple watch",
+    "note": "cool tech",
+    "price": 240.0,
+    "weight": 0.3,
+    "isDelivered": false,
+    "deliveryDate": "2022-09-10T16:00"
+  },
+  {
+    "expiryDate": "2025-07-11T13:30",
+    "id": 4,
+    "type": "cmpt213.assignment3.packagedeliveries.model.Perishable",
+    "name": "Candy",
+    "note": "A lot of calories",
+    "price": 12.0,
+    "weight": 1.0,
+    "isDelivered": false,
+    "deliveryDate": "2023-07-14T00:30"
   }
 ]

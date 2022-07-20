@@ -1,9 +1,8 @@
 package cmpt213.assignment3.packagedeliveries.control;
 
 import cmpt213.assignment3.packagedeliveries.gson.extras.RuntimeTypeAdapterFactory;
-import cmpt213.assignment3.packagedeliveries.model.*;
 import cmpt213.assignment3.packagedeliveries.model.Package;
-import cmpt213.assignment3.packagedeliveries.view.TextUI;
+import cmpt213.assignment3.packagedeliveries.model.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
@@ -16,6 +15,10 @@ import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.*;
 
+/**
+ * A class that holds package information in a list of packages
+ * @author Kyle Tseng
+ */
 public class PackageDeliveriesTracker {
     static RuntimeTypeAdapterFactory<Package> packageAdapterFactory = RuntimeTypeAdapterFactory.of(Package.class, "type", true)
             .registerSubtype(Perishable.class, Perishable.class.getName())
@@ -40,45 +43,9 @@ public class PackageDeliveriesTracker {
         this.packageList = packageList;
     }
 
-    public void main(String[] args) {
-        readFromJson();
 
-        TextUI textUI = new TextUI();
-        textUI.addMenu();
 
-        boolean isChoosing = true;
-        while(isChoosing) {
-            textUI.displayMenu();
-            System.out.println("Choose an option by entering 1-7\n");
-            int input = textUI.getInput();
-            switch (input) {
-                case 1:
-                    listAllPackages();
-                    break;
-                case 2:
-                    addPackage();
-                    break;
-                case 3:
-                    removePackage();
-                    break;
-                case 4:
-                    listOverdue();
-                    break;
-                case 5:
-                    listUpcoming();
-                    break;
-                case 6:
-                    markAsDelivered();
-                    break;
-                case 7:
-                    isChoosing = false;
-                    saveToJson();
-                    break;
-            }
-        }
-    }
-
-    private void saveToJson() {
+    public void saveToJson() {
         try (FileWriter writer = new FileWriter("./list.json")) {
             myGson.toJson(packageList, writer);
         } catch (IOException e) {
@@ -86,127 +53,67 @@ public class PackageDeliveriesTracker {
         }
     }
 
-    private void markAsDelivered() {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-        int markInput = -1;
-        int packageListIndex = 0;
-        int undeliveredIndex = 1;
-        if (packageList.isEmpty()) {
-            System.out.println("There is no package in the list. \n");
-            return;
-        } else {
-            sortPackages();
-            for (Package thisPackage : packageList) {
-                if (thisPackage.isDelivered() == "No") {
-                    System.out.println("Package number: " + undeliveredIndex);
-                    map.put(undeliveredIndex, packageListIndex);
-                    undeliveredIndex++;
-                    System.out.println(thisPackage);
-                }
-                packageListIndex++;
-            }
-        }
-        while (markInput != 0) {
-            Scanner console = new Scanner (System.in);
-
-            System.out.println("Enter the package number you would like to mark (0 to cancel): ");
-            markInput = console.nextInt();
-            if (markInput == 0) {
-                System.out.println("Cancelled.");
-                break;
-            } else if (map.get(markInput) != null) {
-                System.out.println(packageList.get(map.get(markInput)).getName() + " has been marked as delivered.");
-                packageList.get(map.get(markInput)).setDelivered(true);
-                markInput = 0;
-            } else if (map.get(markInput) == null) {
-                System.out.println("Input is invalid, please try again.");
-                markInput = -1;
-            }
-        }
+    /**
+     * Remove a package from the package list
+     * @param thisPackage A package to be removed from the list
+     */
+    public void removePackage(Package thisPackage) {
+        packageList.remove(thisPackage);
     }
 
-    private void listUpcoming() {
-        if (packageList.isEmpty()) {
-            System.out.println("No upcoming packages. \n");
-        } else {
-            sortPackages();
-            for (Package thisPackage : packageList) {
-                if (thisPackage.isDelivered() == "No" && thisPackage.getDeliveryDate().isAfter(now)) {
-                    System.out.println(thisPackage);
-                }
-            }
-        }
+    /**
+     * Update delivered state of a package
+     * @param thisPackage A package to update the delivered state
+     * @param isDelivered A boolean used to set the delivered state
+     */
+    public void updateDelivered(Package thisPackage, boolean isDelivered) {
+        thisPackage.setDelivered(isDelivered);
     }
 
-    private void listOverdue() {
-        if (packageList.isEmpty()) {
-            System.out.println("No overdue packages. \n");
-        } else {
-            sortPackages();
-            for (Package thisPackage : packageList) {
-                if (thisPackage.isDelivered() == "No" && thisPackage.getDeliveryDate().isBefore(now)) {
-                    System.out.println(thisPackage);
-                }
-            }
-        }
+    /**
+     * Add a package to the package list
+     * @param name
+     * @param note
+     * @param price
+     * @param weight
+     * @param deliveryDate
+     * @param fee
+     * @param author
+     * @param expiryDate
+     * @param type
+     */
+    public void addPackage(String name,
+                            String note,
+                            Double price,
+                            Double weight,
+                            LocalDateTime deliveryDate,
+                            Double fee,
+                            String author,
+                            LocalDateTime expiryDate,
+                            Object type)
+    {
+        packageList.add(PackageFactory.createPackage(
+                name,
+                note,
+                price,
+                weight,
+                deliveryDate,
+                fee,
+                author,
+                expiryDate,
+                type.toString()));
     }
 
-    private void removePackage() {
-        sortPackages();
-        int index = 1;
-        int removeId = -1;
-        if (packageList.isEmpty()) {
-            System.out.println("There is no packages in the list. \n");
-            return;
-        } else {
-            for (Package thisPackage : packageList) {
-                System.out.println("Package number: " + index);
-                index++;
-                System.out.println(thisPackage);
-            }
-        }
-        while (removeId != 0) {
-            Scanner console = new Scanner (System.in);
-            System.out.println("Enter the package number you would like to remove (0 to cancel): ");
-            removeId = console.nextInt();
-            if (removeId == 0) {
-                System.out.println("Cancelled");
-                break;
-            } else if (packageList.size() < (removeId)) {
-                System.out.println("Package doesn't exist, please try again");
-                removeId = -1;
-
-            } else if (packageList.size() >= (removeId)){
-                System.out.println(packageList.get(removeId - 1).getName() + " has been removed.\n");
-                packageList.remove(removeId - 1);
-                removeId = 0;
-            }
-        }
-    }
-
-    private void addPackage() {
-        packageList.add(PackageFactory.addPackage());
-    }
-
-    private void listAllPackages() {
-        int index = 1;
-        if (packageList == null || packageList.isEmpty()) {
-            System.out.println("No packages to show\n");
-        }
-        else {
-            sortPackages();
-            for (Package thisPackage : packageList) {
-                System.out.println("Package number: " + index);
-                index++;
-                System.out.println(thisPackage);
-            }
-        }
-    }
-
-    private void sortPackages() {
+    /**
+     * Sort the package list
+     */
+    public void sortPackages() {
         Collections.sort(packageList);
     }
 
+    /**
+     * Load the JSON file to poppulate the package list
+     */
     public void readFromJson() {
         File f = new File("./list.json");
         if (!f.exists()) {
@@ -226,21 +133,62 @@ public class PackageDeliveriesTracker {
         }
     }
 
+    /**
+     * Get a list of all packages
+     * @return An arraylist of all packages
+     */
     public ArrayList<Package> getPackageList() {
+        int index = 1;
+        ArrayList<Package> allList = new ArrayList<>();
+        if (packageList.isEmpty()) {
+            return packageList;
+        }
+        for (Package thisPackage : packageList) {
+            thisPackage.setId(index);
+            index++;
+        }
         return packageList;
     }
 
+    /**
+     * Get a list of overdue packages that are not delivered
+     * @return An arraylist of overdue packages
+     */
     public ArrayList<Package> getOverdue() {
         sortPackages();
+        int index = 1;
         ArrayList<Package> overdueList = new ArrayList<>();
         if (packageList.isEmpty()) {
             return overdueList;
         }
         for (Package thisPackage : packageList) {
             if (thisPackage.isDelivered() == "No" && thisPackage.getDeliveryDate().isBefore(now)) {
+                thisPackage.setId(index);
                 overdueList.add(thisPackage);
+                index++;
             }
         }
         return overdueList;
+    }
+
+    /**
+     * Get a list of upcoming packages that are not delivered
+     * @return An arraylist of upcoming packages
+     */
+    public ArrayList<Package> getUpcoming() {
+        sortPackages();
+        int index = 1;
+        ArrayList<Package> upcomingList = new ArrayList<>();
+        if (packageList.isEmpty()) {
+            return upcomingList;
+        }
+        for (Package thisPackage : packageList) {
+            if (thisPackage.isDelivered() == "No" && thisPackage.getDeliveryDate().isAfter(now)) {
+                thisPackage.setId(index);
+                upcomingList.add(thisPackage);
+                index++;
+            }
+        }
+        return upcomingList;
     }
 }
