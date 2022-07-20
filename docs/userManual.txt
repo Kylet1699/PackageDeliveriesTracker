@@ -1,0 +1,54 @@
+************** User Manual **************
+
+When user runs the program, a window containing 3 tabs will appear. Each of those tabs corresponds to
+- Show all packages
+- Show upcoming packages
+- Show overdue packaegs
+
+* All tab *
+All tab displays all the packages in the package list including the following information for each package:
+- Package number (Starting from 1)
+- Type of the package
+- Package name
+- Package note
+- Package price
+- Package weight
+- Expected delivery date
+- If the package is delivered or not
+- Environmental handling fee or expiry date or author based on the package type
+
+Each package information panel also contains a checkbox with the label "Delivered". This checkbox is provided for the user to toggle each individual package as being delivered or not.
+If the checkbox is not checked, the package is not delivered and it will also reflect in the package information field as "Delivered? No".
+When the user checks the checkbox, package information field will immediately reflect and change to "Delivered? Yes" and vice versa if the user unchecks the checkbox.
+
+Below the checkbox, there is a button named "Remove". Clicking on this button will immediately remove the package from the package list and the display will also reflect that change immediately.
+
+* Upcoming tab *
+Upcoming tab displays a list of packages in the package list that are not delivered and has an expected delivery date later than the user's current time.
+All packages displayed contains the same information as the "All tab" without the checkbox and "Remove" button.
+
+* Overdue tab *
+Overdue tab displays a list of packages in the package list that are not delivered and has an expected delivery date before the user's current time.
+All packages displayed contains the same information as the "All tab" without the checkbox and "Remove" button.
+
+If the user would like to remove or change delivered status of a package displayed under the "Upcoming" or "Overdue" tab, they are required to go into the "All" tab first for those operations.
+Any changes made in the "All" tab will reflect immediately in the "Upcoming" and "Overdue" tab.
+
+* Add Package *
+To add a package, user should navigate to the bottom of the window and click on "Add Package" button.
+A prompt would show up with the following fields
+- Package type (Combo box)
+- Package name (Text field)
+- Package note (Text field)
+- Package price (Text field)
+- Package weight (Text field)
+- Delivery date (DateTime picker)
+- One more field based on the selected package type
+    - Electronic fee if package type is Electronic (Text field)
+    - Expiry date if package type is Perishable (DateTime picker)
+    - Author if package type is Book (Text field)
+
+Once user inputs in package information, simply click on "Add" and the package would be added to the package list and show up in the display tabs
+User is required to input in all the fields listed above except for Package note.
+If any required field is left empty when user clicks on "Add", a new window containing an error message would show up. Close the error message window to go back to the add package window and fill in the missing fields.
+If the user would like to exit the add package window, simply click on the "x" in the top right corner of the window or the "Cancel" button to exit back to the main display.
